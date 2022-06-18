@@ -6,6 +6,7 @@ import ProductList from './ProductList';
 import ProductDetail from './ProductDetail';
 import Panier from './Panier';
 import AddProduct from './AddProduct';
+import UserConnexion from './UserConnexion';
 import { useState, useEffect } from 'react';
 import CreateLink from './CreateLink';
 
@@ -67,7 +68,9 @@ function App(props) {
         {currentPage=='detail-panier' &&
           <Panier setCurrentPage={setCurrentPage} userId={userId} />
         }
-
+        {currentPage=='user-connexion' &&
+          <UserConnexion setCurrentPage={setCurrentPage} />
+        }
       </header>
     </div>
   );

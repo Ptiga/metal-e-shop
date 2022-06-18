@@ -16,8 +16,7 @@ function Panier(props){
             .then(response => response.json())
             .then(panierRetrieved => {
                 setPanierUser(panierRetrieved)
-            })
-            
+            })  
         fetch('http://localhost:4000/get-products', {
             method: 'GET',
             credentials: 'include'
@@ -62,7 +61,12 @@ return(
             setCurrentProduct={props.setCurrentProduct}
         />
 
-        <ClearCartButton props={props} />
+        <ClearCartButton 
+            setCurrentPage={props.setCurrentPage} 
+            currentName = 'product-list'
+            link_ref='#product-list'
+            props={props} 
+        />   
 
     </div>
 )

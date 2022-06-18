@@ -1,6 +1,9 @@
 import Panier from "./Panier"
 
-function ClearCartRequest(props){
+function ClearCartRequest(){
+
+    console.log('Fonction se lance quand même...')
+    console.log('Fonction se lance quand même...')
 
     let url = `http://localhost:4000/clear-cart-user/`
 
@@ -44,7 +47,7 @@ function ClearCartButton(props){
     */
         return(
             <div>
-                <button onClick={ClearCartRequest(props)} >
+                <button href={props.link_ref} onClick={() => {ClearCartRequest() ; props.setCurrentPage(props.currentName)}} >
                     Vider panier
                 </button>
             </div>
