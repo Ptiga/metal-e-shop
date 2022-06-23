@@ -48,7 +48,7 @@ function ProductList(props){
                 Liste des produits
             </h1>
             <h3>
-                C'est moche mais ça fonctionne (à peu près mais pas sur tout) !
+                C'est moche mais ça fonctionne à peu près (mais pas sur tout) !
             </h3>
   
 

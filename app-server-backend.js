@@ -18,7 +18,6 @@ app.use(cors({
 }))
 
 const cookieParser = require('cookie-parser');
-const DatabaseManager = require("./DatabaseManager");
 app.use(cookieParser());
 
 app.listen(port, () => {
@@ -34,30 +33,88 @@ app.use(
         }
     )
 )
-
-
-
-
+/*
+app.get("/", (request, response, next) => {
+    response.redirect("/#")
+})
+*/
 app.get("/", (request, response, next) => {
 
     if(! request.session.userId){
         request.session.userId = uid(32)
         request.session.panierUser = []
         request.session.isUserLogged = false
-        request.session.userLogin = '' 
+        request.session.userLogin = 'client' 
+        request.session.userRole = '' 
     }
-
+    let retourJson = {
+        login: request.session.userLogin,
+        isLogged: request.session.isUserLogged,
+        role: request.session.userRole,
+        panier: request.session.panierUser
+    }
     console.log('cookie de session: ', request.session)
     console.log('cookie de session (id): ', request.cookies)
     console.log('cookie de session (id): ', request.cookies['connect.sid'])
-    response.send(request.cookies['connect.sid'])
-
+    //response.send(request.cookies['connect.sid'])
+    response.json(request.session)
 })
 
 
-app.post("/user-connexion/", (request, response, next) => {
+app.post("/user-connexion", (request, response, next) => {
+    //let passewordReceived = request.body.password
+    console.log('req en réception : ',request.body)
+    console.log('req en réception : ',request.body.login)
+    console.log('req en réception : ',request.body.password)
+    DBManager.checkLogin(request.body, 'User-connect', function (error, results, fields) {
+        console.log('result de la requête après traitement: ', results)
+        console.log('taille : ', results.length)
+        if(results.length == 0 || request.body.password != results[0].user_password){
+            request.session.isUserLogged = false
+            request.session.userLogin = '' 
+            request.session.userRole = ''
+            console.log("not connected")
+            console.log('cookie de session: ', request.session)
+            response.send("not connected")
+        }else{
+            request.session.isUserLogged = true
+            request.session.userLogin = results[0].user_login 
+            request.session.userRole = results[0].user_role
+            console.log("connected")
+            console.log('cookie de session: ', request.session)
+            response.send("connected")
+            //response.json(request.session)
+
+        }
+        
+        /*
+        console.log('mail user: ', results[0].user_email)
+        console.log('login user: ', results[0].user_login)
+        console.log('password user: ', results[0].user_password)
+        console.log('role user: ', results[0].user_role)
+
+        console.log('req en réception : ',request.body.password)
+        console.log('password user: ', results[0].user_password)
+        console.log(request.body.password == results[0].user_password)
+        */
+        //response.json(results)
+    })
+})
     
-})
+    //.then(console.log('result: ', res))
+    /*
+    setTimeout(function () {
+        console.log(request.session)
+        response.json()
+    }, 1000);
+    */
+    //console.log('Resultat en sortie: ',results)
+    /*
+    DBManager.updateDataBase(request.body, 'User-connect'),
+        function (error, results, fields) {
+    }
+    */   
+
 
 
 

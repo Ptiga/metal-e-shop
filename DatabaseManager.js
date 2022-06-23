@@ -2,8 +2,6 @@ const req = require('express/lib/request');
 var mysql = require('mysql');
 
 
-
-
 //Connexion à la BDD
 function connexionToMysql() {
   var connexion = mysql.createConnection({
@@ -15,8 +13,6 @@ function connexionToMysql() {
   connexion.connect();
   return connexion
 }
-
-
 
 
 //Fonction pour obtenir des éléments
@@ -52,9 +48,11 @@ function getProduct(fonctionDeTraitementResultatBDD, updateType, productId, pani
   });
 }
 
+
+
 //Fonction pour mettre à jour des éléments
 function updateDataBase(requeteBody, updateType) {
-    console.log('rqt bd: ', requeteBody)
+  console.log('rqt bd: ', requeteBody)
 
     let connexionBdd = connexionToMysql()
     //updateType  = adjustUpdateType(requeteBody, updateType)
@@ -74,8 +72,34 @@ function updateDataBase(requeteBody, updateType) {
       connexionBdd.commit() // Permet d'enregistrer les modifications sur la BDD
       connexionBdd.end();
       console.log("step 3 - close query mode")
-    });
+    });  
+  }
   
+  
+  //Fonction pour obtenir des éléments
+  function checkLogin(requestBody, updateType, fonctionDeTraitementResultatBDD) {
+    let connexionBdd = connexionToMysql()
+    let requete = requestToApply(updateType)
+    let dataToInsert = dataToApplyForRequest(requestBody, updateType)
+    console.log('Requete : ', requete)
+    //connexionBdd.query(requete, fonctionDeTraitementResultatBDD)
+    //connexionBdd.end();
+    connexionBdd.query(requete, dataToInsert, fonctionDeTraitementResultatBDD)
+    /* 
+    {
+      if (error) {
+        console.log(error)
+      }// throw error;
+      else {
+        // console.log("step 2 - query application")
+        console.log("Données insérées");
+      }
+      //connexionBdd.commit() // Permet d'enregistrer les modifications sur la BDD
+      console.log('result rq: ', results)
+      connexionBdd.end();
+      console.log("step 3 - close query mode")
+    });
+    */
   }
 
 
@@ -94,6 +118,8 @@ function requestToApply(selection) {
             return `DELETE FROM produits WHERE id_produit = ?`
         default:
             return `Selection not found`
+        case 'User-connect' :
+            return `SELECT * FROM shop_user WHERE user_email = ?`
     }
   }
 
@@ -106,6 +132,8 @@ function dataToApplyForRequest(requeteBody, selection){
             return [requeteBody['artiste'], requeteBody['album'],requeteBody['genre'], requeteBody['prix'], requeteBody['id_produit']]
         case 'Remove-product' :
             return [requeteBody['id_produit']]
+        case 'User-connect' :
+            return [requeteBody['login']]
         default:
             return ``
     }
@@ -119,6 +147,7 @@ module.exports = {
     getProduct: getProduct,
     updateDataBase: updateDataBase,
     requestToApply: requestToApply,
-    dataToApplyForRequest: dataToApplyForRequest
+    dataToApplyForRequest: dataToApplyForRequest,
+    checkLogin: checkLogin
   }
   
