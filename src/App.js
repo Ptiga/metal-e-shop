@@ -15,6 +15,9 @@ function App(props) {
   let [currentPage, setCurrentPage] = useState('homepage')
   let [currentProduct, setCurrentProduct] = useState(0)
   let[userId, setuserId] = useState()
+  
+  let x = []
+  console.log(typeof(x))
 
   let contactList={
     adresse: '666 Highway to Hell (MORDOR)',
@@ -29,33 +32,25 @@ function App(props) {
           credentials: 'include'
           //credentials: "same-origin"
       })
-            .then(response => response.json())
+            //.then(response => response.json())
+            .then(response => response.text())
             .then(userIdRetrieved => {
               console.log('u retr ', userIdRetrieved)
-              setuserId({
+              /*setuserId({
                 login: userIdRetrieved.userLogin, 
                 isLogged: userIdRetrieved.isUserLogged, 
                 role: userIdRetrieved.userRole
-              })
-              //setuserId(userIdRetrieved.userLogin)
+              })*/
+              /*
+              setuserId([
+                userIdRetrieved.userLogin,
+                userIdRetrieved.isUserLogged,
+                userIdRetrieved.userRole
+              ])
+              */
+              setuserId(userIdRetrieved)
               console.log('user id: ', userId)
             })
-      fetch('http://localhost:4000/', {
-        method: 'GET',
-        credentials: 'include'
-        //credentials: "same-origin"
-    })
-          .then(response => response.json())
-          .then(userIdRetrieved => {
-            console.log('u retr ', userIdRetrieved)
-            setuserId({
-              login: userIdRetrieved.userLogin, 
-              isLogged: userIdRetrieved.isUserLogged, 
-              role: userIdRetrieved.userRole
-            })
-            //setuserId(userIdRetrieved.userLogin)
-            console.log('user id: ', userId)
-          })
     }, [])
 
 

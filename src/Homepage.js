@@ -7,7 +7,7 @@ import UserConnexion from "./UserConnexion";
 function Homepage(props){
 
     console.log('props user : ', props.user)
-    console.log('props role : ', props.role)
+    console.log('props role : ', props.user)
 
     return(
         <div className="Homepage">
@@ -16,7 +16,7 @@ function Homepage(props){
                 Metal e-shop
             </span><br />
             <h3 className="user-welcome">
-                Bienvenue 
+                Bienvenue {props.user}
             </h3><br />
 
             <img src="/caisse-disques.png" alt="shop-logo" width="150" /><br />

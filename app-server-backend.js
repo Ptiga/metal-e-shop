@@ -29,35 +29,51 @@ app.use(
     session(
         { 
             secret: 'keyboard cat', 
+            resave: false,
+            saveUninitialized: true,
             cookie: { maxAge: 600000 }
         }
     )
 )
+
+const checkSession = (request, response, next) => {
+    if(request.session && request.session.isUserLogged == true){
+        response.send(request.session.userLogin)
+        next()
+    }else{
+        response.send('User not logged')
+    }
+}
+
+
 /*
 app.get("/", (request, response, next) => {
     response.redirect("/#")
 })
 */
-app.get("/", (request, response, next) => {
+app.get("/", checkSession, (request, response, next) => {
 
     if(! request.session.userId){
         request.session.userId = uid(32)
         request.session.panierUser = []
         request.session.isUserLogged = false
-        request.session.userLogin = 'client' 
-        request.session.userRole = '' 
+        request.session.userLogin = '' 
+        request.session.userRole = 'client'
     }
+    /*
     let retourJson = {
         login: request.session.userLogin,
         isLogged: request.session.isUserLogged,
         role: request.session.userRole,
         panier: request.session.panierUser
     }
+    */
     console.log('cookie de session: ', request.session)
     console.log('cookie de session (id): ', request.cookies)
     console.log('cookie de session (id): ', request.cookies['connect.sid'])
-    //response.send(request.cookies['connect.sid'])
-    response.json(request.session)
+    response.send(request.cookies['connect.sid'])
+    //response.json(request.session)
+    //response.cookie(request.session)
 })
 
 

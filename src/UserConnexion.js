@@ -26,10 +26,10 @@ function ConnectUser(event){
     console.log('url: ', url)
 
     fetch(url, requestOptions)
-    .then(response => 
+    .then(response => response.text())
         //response.json())
         //console.log('réponse log: ', response.json()))
-        console.log('réponse log: ', response.text()))
+        //console.log('réponse log: ', response.text()))
     //.then(data => this.setState({ postId: data.id }));
     .then(data => 
         console.log('data: ',data))
