@@ -14,6 +14,11 @@ function App(props) {
 
   let [currentPage, setCurrentPage] = useState('homepage')
   let [currentProduct, setCurrentProduct] = useState(0)
+  let [currentArtist, setCurrentArtist] = useState('')
+  let [currentAlbum, setCurrentAlbum] = useState('')
+  let [currentGenre, setCurrentGenre] = useState('')
+  let [currentPrix, setCurrentPrix] = useState(0.0)
+
   let[userId, setuserId] = useState()
   
   let x = []
@@ -72,7 +77,14 @@ function App(props) {
         }
         {currentPage==='product-list' &&
           <div>
-            <ProductList setCurrentPage={setCurrentPage} setCurrentProduct={setCurrentProduct} />
+            <ProductList 
+              setCurrentPage={setCurrentPage} 
+              setCurrentProduct={setCurrentProduct}
+              setCurrentArtist={setCurrentArtist}
+              setCurrentAlbum={setCurrentAlbum}
+              setCurrentGenre={setCurrentGenre}
+              setCurrentPrix={setCurrentPrix}
+             />
           </div> 
         }
         {currentPage==='add-product' &&
@@ -82,7 +94,14 @@ function App(props) {
           <div>
             {console.log('Je passe par ici voici le props : ', props)}
             {console.log('Le current produit : ', currentProduct)}
-            <ProductDetail setCurrentPage={setCurrentPage} currentProduct={currentProduct} />
+            <ProductDetail 
+              setCurrentPage={setCurrentPage} 
+              currentProduct={currentProduct}
+              currentArtist={currentArtist}
+              currentAlbum={currentAlbum}
+              currentGenre={currentGenre}
+              currentPrix={currentPrix}
+             />
           </div> 
         }
         {currentPage==='detail-panier' &&

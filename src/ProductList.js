@@ -1,4 +1,5 @@
 import CreateLink from "./CreateLink"
+import CreateProductLink from "./CreateProductLink";
 import { useState, useEffect } from 'react';
 import ProductPreview from "./ProductPreview";
 import Panier from "./Panier";
@@ -27,6 +28,10 @@ function ProductList(props){
             {...elementDeLaListe} 
             setCurrentPage={props.setCurrentPage} 
             setCurrentProduct={props.setCurrentProduct} 
+            setCurrentArtist={props.setCurrentArtist} 
+            setCurrentAlbum={props.setCurrentAlbum} 
+            setCurrentGenre={props.setCurrentGenre} 
+            setCurrentPrix={props.setCurrentPrix} 
             setCartUser={setCartUser} 
             cartUser={cartUser} 
             productId={props.id_produit} 
@@ -64,13 +69,17 @@ function ProductList(props){
                         {composantProduits}
                     </div>
                     <div className="row">
-                        <CreateLink 
-                        setCurrentPage={props.setCurrentPage} 
-                        currentName='homepage' 
-                        link_ref='#' 
-                        link_name='Accueil' 
-                        productId={props.id_produit}
-                        setCurrentProduct={props.setCurrentProduct}
+                        <CreateProductLink 
+                            setCurrentPage={props.setCurrentPage} 
+                            currentName='homepage' 
+                            link_ref='#' 
+                            link_name='Accueil' 
+                            productId={props.id_produit}
+                            setCurrentProduct={props.setCurrentProduct}
+                            setCurrentArtist={props.setCurrentArtist}
+                            setCurrentAlbum={props.setCurrentAlbum}
+                            setCurrentGenre={props.setCurrentGenre}
+                            setCurrentPrix={props.setCurrentPrix}
                         />
                     </div>
                 </div>
@@ -81,3 +90,18 @@ function ProductList(props){
 }
 
 export default ProductList
+
+/*
+<CreateLink 
+    setCurrentPage={props.setCurrentPage} 
+    currentName='homepage' 
+    link_ref='#' 
+    link_name='Accueil' 
+    productId={props.id_produit}
+    setCurrentProduct={props.setCurrentProduct}
+    setCurrentArtist={props.setCurrentArtist}
+    setCurrentAlbum={props.setCurrentAlbum}
+    setCurrentGenre={props.setCurrentGenre}
+    setCurrentPrix={props.setCurrentPrix}
+/>
+*/

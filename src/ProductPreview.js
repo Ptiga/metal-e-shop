@@ -73,7 +73,7 @@ function ProductPreview(props) {
 
     
 
-
+    console.log('pros à la créa du detail: ', props)
 
     return (
         <div className="col-2">
@@ -100,7 +100,15 @@ function ProductPreview(props) {
                         link_ref={ref_lien} 
                         link_name='Album detail' 
                         productId={props.id_produit}
+                        artiste={props.artiste}
+                        album={props.album}
+                        genre={props.genre}
+                        prix={props.prix}
                         setCurrentProduct={props.setCurrentProduct}
+                        setCurrentArtist={props.setCurrentArtist} 
+                        setCurrentAlbum={props.setCurrentAlbum} 
+                        setCurrentGenre={props.setCurrentGenre} 
+                        setCurrentPrix={props.setCurrentPrix} 
                     />
                     <CreateButton 
                         actionOnClickButton={AddToCartClick} 
@@ -120,7 +128,21 @@ function ProductPreview(props) {
 
 //{...productData}
 //-> Permet de faire la copie d'un objet
-
+/*
+NOT WORKING
+                    <CreateDetailButton 
+                        setCurrentPage={props.setCurrentPage} 
+                        currentName='product-detail' 
+                        link_ref={ref_lien} 
+                        link_name='Album detail' 
+                        productId={props.id_produit}
+                        artiste={props.artiste}
+                        album={props.album}
+                        genre={props.genre}
+                        prix={props.prix}
+                        setCurrentProduct={props.setCurrentProduct}
+                    />
+*/
 
 /*
 <span>ref : </span><span id="ref">{props.id_produit}</span>
@@ -136,6 +158,12 @@ function ProductPreview(props) {
     setCurrentProduct={props.setCurrentProduct}
 />
 
+
+                            setCurrentProduct={props.setCurrentProduct}
+                            setCurrentArtist={props.setCurrentArtist}
+                            setCurrentAlbum={props.setCurrentAlbum}
+                            setCurrentGenre={props.setCurrentGenre}
+                            setCurrentPrix={props.setCurrentPrix}
 
 */
 

@@ -151,9 +151,9 @@ app.get("/product-detail/:productId", (request, response, next) => {
     DBManager.getProduct(function (error, results, fields){
         //console.log('Get prod detail: ', productId)
         //response.send(`Détail concernant le produit n°${productId}`)
-        //console.log('résultat 1 produit: ', results[0])
+        console.log('résultat 1 produit: ', results[0])
         //response.send('retour ok')
-        response.json(results)
+        response.json(results[0])
     }, 'Retrieve-one-product', request.params.productId)
 })
 

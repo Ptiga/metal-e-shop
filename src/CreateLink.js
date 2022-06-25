@@ -27,3 +27,10 @@ function CreateLink(props){
 }
 
 export default CreateLink
+
+/*
+setCurrentArtist={props.setCurrentArtist}
+setCurrentAlbum={props.setCurrentAlbum}
+setCurrentGenre={props.setCurrentGenre}
+setCurrentPrix={props.setCurrentPrix}
+*/
