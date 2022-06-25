@@ -98,7 +98,8 @@ app.post("/user-connexion", (request, response, next) => {
             request.session.userRole = results[0].user_role
             console.log("connected")
             console.log('cookie de session: ', request.session)
-            response.send("connected")
+            //response.send("connected")
+            response.send('Connected as  ' + request.session.userLogin)
             //response.json(request.session)
 
         }

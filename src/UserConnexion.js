@@ -32,7 +32,8 @@ function ConnectUser(event){
         //console.log('réponse log: ', response.text()))
     //.then(data => this.setState({ postId: data.id }));
     .then(data => 
-        console.log('data: ',data))
+        //console.log('data: ',data))
+        alert(data))
     //.catch(e => alert('error: ' + e));   
 
 
