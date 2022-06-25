@@ -1,5 +1,13 @@
 import PanierSplit from "./PanierSplit"
 
+
+
+
+
+
+
+
+
 function CompileDetail(panier, produits){
     let detailCompiled = []
     console.log('panier dans split: ', panier)

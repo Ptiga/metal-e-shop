@@ -24,7 +24,20 @@ function getAllProducts(fonctionDeTraitementResultatBDD, updateType) {
     connexionBdd.end();
   }
 
+
 //Fonction pour obtenir des éléments
+function getProduct(fonctionDeTraitementResultatBDD, updateType, productId) {
+  let connexionBdd = connexionToMysql()
+  let requete = requestToApply(updateType)
+  console.log('Requete : ', requete)
+  //connexionBdd.query(requete, fonctionDeTraitementResultatBDD)
+  //connexionBdd.end();
+  connexionBdd.query(requete, productId, fonctionDeTraitementResultatBDD)
+  connexionBdd.end();;
+}
+
+/*  
+//Fonction pour obtenir des éléments (OLD FONCTION)
 function getProduct(fonctionDeTraitementResultatBDD, updateType, productId, panierUser) {
   let connexionBdd = connexionToMysql()
   let requete = requestToApply(updateType)
@@ -47,7 +60,7 @@ function getProduct(fonctionDeTraitementResultatBDD, updateType, productId, pani
     console.log("step 3 - close query mode")
   });
 }
-
+*/
 
 
 //Fonction pour mettre à jour des éléments

@@ -7,7 +7,6 @@ import UserConnexion from "./UserConnexion";
 function Homepage(props){
 
     console.log('props user : ', props.user)
-    console.log('props role : ', props.user)
 
     return(
         <div className="Homepage">
@@ -18,54 +17,77 @@ function Homepage(props){
             <h3 className="user-welcome">
                 Bienvenue {props.user}
             </h3><br />
-
-            <img src="/caisse-disques.png" alt="shop-logo" width="150" /><br />
-            <CreateLink 
-                setCurrentPage={props.setCurrentPage} 
-                currentName='product-list' 
-                link_ref='#product-list' 
-                link_name='Liste des produits' 
-                productId={props.id_produit}
-                setCurrentProduct={props.setCurrentProduct}
-            />
+            <div className="row">
+                <div className="col">
+                    <CreateLink 
+                        setCurrentPage={props.setCurrentPage} 
+                        currentName='product-list' 
+                        link_ref='#product-list' 
+                        link_name='Consulter le catalogue' 
+                        productId={props.id_produit}
+                        setCurrentProduct={props.setCurrentProduct}
+                        isPictureLink={true}
+                        pictureName={"/caisse-disques.png"}
+                    />
+                </div>
+            </div>
+            <br />
+            <div className="row">
+                <div className="col">
+                    <CreateLink 
+                        setCurrentPage={props.setCurrentPage} 
+                        currentName='contact' 
+                        link_ref='#contact' 
+                        link_name='Contacts'
+                        productId={props.id_produit} 
+                        setCurrentProduct={props.setCurrentProduct}
+                        isPictureLink={true}
+                        pictureName={"/Conan-Contact.png"}
+                    />
+                </div>
+                <div className="col">
+                    <CreateLink 
+                        setCurrentPage={props.setCurrentPage} 
+                        currentName='add-product' 
+                        link_ref='#add-product' 
+                        link_name='Ajouter un produit' 
+                        productId={props.id_produit}
+                        setCurrentProduct={props.setCurrentProduct}
+                        isPictureLink={true}
+                        pictureName={"/ajouter-liste-color.png"}
+                    />
+                </div>
+                <div className="col">
+                    <CreateLink 
+                        setCurrentPage={props.setCurrentPage} 
+                        currentName='user-connexion' 
+                        link_ref='#login' 
+                        link_name='Connexion'
+                        productId={props.id_produit} 
+                        setCurrentProduct={props.setCurrentProduct}
+                        user={props.user}
+                        isPictureLink={true}
+                        pictureName={"/logon.png"}
+                    />
+                </div>
+                <div className="col">
+                    <CreateLink 
+                        setCurrentPage={props.setCurrentPage} 
+                        currentName='user-deconnexion' 
+                        link_ref='#logout' 
+                        link_name='Déconnexion'
+                        productId={props.id_produit} 
+                        setCurrentProduct={props.setCurrentProduct}
+                        user={props.user}
+                        isPictureLink={true}
+                        pictureName={"/exit-green.png"}
+                    />
+                </div>
+            </div>
             <br />
             <RandomTrack />
 
 
-            <CreateLink 
-                setCurrentPage={props.setCurrentPage} 
-                currentName='contact' 
-                link_ref='#contact' 
-                link_name='Contacts'
-                productId={props.id_produit} 
-                setCurrentProduct={props.setCurrentProduct}
-            />
-            <CreateLink 
-              setCurrentPage={props.setCurrentPage} 
-              currentName='add-product' 
-              link_ref='#add-product' 
-              link_name='Ajouter un produit' 
-              productId={props.id_produit}
-              setCurrentProduct={props.setCurrentProduct}
-            />
-            <CreateLink 
-                setCurrentPage={props.setCurrentPage} 
-                currentName='user-connexion' 
-                link_ref='#login' 
-                link_name='Connexion'
-                productId={props.id_produit} 
-                setCurrentProduct={props.setCurrentProduct}
-                user={props.user}
-            />
-            <CreateLink 
-                setCurrentPage={props.setCurrentPage} 
-                currentName='user-deconnexion' 
-                link_ref='#logout' 
-                link_name='Déconnexion'
-                productId={props.id_produit} 
-                setCurrentProduct={props.setCurrentProduct}
-                user={props.user}
-            />
         </div>
     )
 

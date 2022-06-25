@@ -69,6 +69,14 @@ p.song-name{
   }
 }
 
+div.contact-info{
+  text-align: left;
+}
+
+div.artist-name, div.album-name{
+  text-align: center;
+}
+
 @font-face {
   font-family: "Metallica";
   src: url("fonts/Pastor of Muppets.TTF") format("truetype");

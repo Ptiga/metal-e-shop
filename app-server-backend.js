@@ -55,11 +55,12 @@ app.get("/", (request, response, next) => {
 app.get("/", checkSession, (request, response, next) => {
 
     if(! request.session.userId){
-        request.session.userId = uid(32)
-        //request.session.panierUser = []
-        //request.session.isUserLogged = false
-        //request.session.userLogin = '' 
-        //request.session.userRole = 'client'
+        console.log('je passe par là')
+        request.session.userId = uid(32),
+        request.session.panierUser = [],
+        request.session.isUserLogged = false,
+        request.session.userLogin = '' ,
+        request.session.userRole = 'client'  
     }
     /*
     let retourJson = {
@@ -145,6 +146,18 @@ app.get("/get-products", (request, response, next) => {
 })
 
 
+app.get("/product-detail/:productId", (request, response, next) => {
+    //let productId = request.params.productId
+    DBManager.getProduct(function (error, results, fields){
+        //console.log('Get prod detail: ', productId)
+        //response.send(`Détail concernant le produit n°${productId}`)
+        //console.log('résultat 1 produit: ', results[0])
+        //response.send('retour ok')
+        response.json(results)
+    }, 'Retrieve-one-product', request.params.productId)
+})
+
+
 app.get("/add-product-to-cart/:productId", (request, response, next) => {
     let productId = request.params.productId
     console.log(typeof(productId))
@@ -152,13 +165,6 @@ app.get("/add-product-to-cart/:productId", (request, response, next) => {
     request.session.panierUser.push(productId)
     console.log('cookie de session: ', request.session)
    response.json(request.session.panierUser)
-})
-
-
-app.get("/product-detail/:productId", (request, response, next) => {
-    let productId = request.params.productId
-    console.log('Get prod detail: ', productId)
-    response.send(`Détail concernant le produit n°${productId}`)
 })
 
 

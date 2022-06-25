@@ -35,34 +35,46 @@ function ProductList(props){
 
 
     return(
-        <div className="product-list">
-              <CreateLink 
-                setCurrentPage={props.setCurrentPage} 
-                currentName='detail-panier' 
-                link_ref='#detail-panier' 
-                link_name='Détail panier' 
-                productId={props.id_produit}
-                setCurrentProduct={props.setCurrentProduct}
-            />
-            <h1>
-                Liste des produits
-            </h1>
-            <h3>
-                C'est moche mais ça fonctionne à peu près (mais pas sur tout) !
-            </h3>
-  
-
-            {composantProduits}
-
-            <CreateLink 
-              setCurrentPage={props.setCurrentPage} 
-              currentName='homepage' 
-              link_ref='#' 
-              link_name='Accueil' 
-              productId={props.id_produit}
-              setCurrentProduct={props.setCurrentProduct}
-            />
-
+        <div className="container">
+            <div className="row">
+                <div className="product-list-head">
+                    <CreateLink 
+                        setCurrentPage={props.setCurrentPage} 
+                        currentName='detail-panier' 
+                        link_ref='#detail-panier' 
+                        link_name='Détail panier' 
+                        productId={props.id_produit}
+                        setCurrentProduct={props.setCurrentProduct}
+                    />
+                </div>
+            </div>
+            <div className="row">
+                <div className="product-list">
+                    <div className="row">
+                        <h1>
+                            Liste des produits
+                        </h1>
+                    </div>
+                    <div className="row">
+                        <h3>
+                            C'est moche mais ça fonctionne à peu près (mais pas sur tout) !
+                        </h3>
+                    </div>
+                    <div className="row">
+                        {composantProduits}
+                    </div>
+                    <div className="row">
+                        <CreateLink 
+                        setCurrentPage={props.setCurrentPage} 
+                        currentName='homepage' 
+                        link_ref='#' 
+                        link_name='Accueil' 
+                        productId={props.id_produit}
+                        setCurrentProduct={props.setCurrentProduct}
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
     )
 

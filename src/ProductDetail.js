@@ -7,7 +7,7 @@ function ProductDetail(props){
     console.log('Détail: ', props)
     console.log('Elément : ', props.currentProduct)
     
-    let [productDetail, setProductDetail] = useState('')
+    let [productDetail, setProductDetail] = useState()
 
 
     fetch(`http://localhost:4000/product-detail/${props.currentProduct}`, {
@@ -19,9 +19,18 @@ function ProductDetail(props){
         //credentials: "same-origin"
     })
             .then(response => response.text())
+            //.then(response => response.json())
             .then(productDetail => setProductDetail(productDetail))
+            //.then(productDetail => setProductDetail(productDetail[0]))
 
     console.log('prod detzil: ',productDetail)
+    /*
+    console.log('prod detzil1: ',productDetail.id_produit)
+    console.log('prod detzil2: ',productDetail.artiste)
+    console.log('prod detzil3: ',productDetail.album)
+    console.log('prod detzil4: ',productDetail.genre)
+    console.log('prod detzil5: ',productDetail.prix)
+    */
     console.log('Détail produit : ', props.currentProduct)
 
 
@@ -35,7 +44,10 @@ function ProductDetail(props){
                 Bla bla bli
             </p>
             <p>
-                Retour requête backend : {productDetail}
+
+            </p>
+            <p>
+
             </p>
             <p>
                 Bla bla bla

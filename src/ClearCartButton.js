@@ -47,7 +47,7 @@ function ClearCartButton(props){
     */
         return(
             <div>
-                <button href={props.link_ref} onClick={() => {ClearCartRequest() ; props.setCurrentPage(props.currentName)}} >
+                <button className="btn btn-outline-secondary btn-sm" href={props.link_ref} onClick={() => {ClearCartRequest() ; props.setCurrentPage(props.currentName)}} >
                     Vider panier
                 </button>
             </div>

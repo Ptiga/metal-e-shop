@@ -2,6 +2,7 @@ import './App.css';
 import logo from './logo.svg';
 import CreateLink from './CreateLink';
 import CreateButton from './CreateButton';
+import CreateDetailButton from './CreateDetailButton';
 import { useState } from 'react';
 
 
@@ -75,36 +76,43 @@ function ProductPreview(props) {
 
 
     return (
-        <div className={divClassName}>
-            <div className="product-image">
-                <img src={image} alt="Album cover" height="200" width="200"/>
+        <div className="col-2">
+            <div className={divClassName}>
+                <div className="product-image">
+                    <img src={image} alt="Album cover" height="200" width="200"/>
+                </div>
+                <div className="product-description">
+                    <div className="artist-name">
+                        <h2><b>{props.artiste}</b></h2>
+                    </div>
+                    <div className="album-name">
+                        <p><i>{props.album}</i></p>
+                    </div>
+                    <span><b>Genre</b> : {props.genre}</span>
+                </div>
+                <div className="product-price">
+                    <p><b>prix</b> : {props.prix} €</p>
+                </div>
+                <div className="product-detail-link">
+                    <CreateDetailButton 
+                        setCurrentPage={props.setCurrentPage} 
+                        currentName='product-detail' 
+                        link_ref={ref_lien} 
+                        link_name='Album detail' 
+                        productId={props.id_produit}
+                        setCurrentProduct={props.setCurrentProduct}
+                    />
+                    <CreateButton 
+                        actionOnClickButton={AddToCartClick} 
+                        buttonName='Ajouter au panier' 
+                        link_ref={ref_bouton} 
+                        link_name='Acheter' 
+                        productId={props.id_produit}
+                        setCartUser={props.setCartUser}
+                        cartUser={props.cartUser}
+                        />
+                </div>
             </div>
-            <div className="product-description">
-                <span><b>Artiste</b> : {props.artiste}</span><br/>
-                <span><b>Album</b> : {props.album}</span><br/>
-                <span><b>Genre</b> : {props.genre}</span>
-            </div>
-            <div className="product-price">
-                <p><b>prix</b> : {props.prix} €</p>
-            </div>
-            <CreateLink 
-                setCurrentPage={props.setCurrentPage} 
-                currentName='product-detail' 
-                link_ref={ref_lien} 
-                link_name='Album detail' 
-                productId={props.id_produit}
-                setCurrentProduct={props.setCurrentProduct}
-                />
-            <CreateButton 
-                actionOnClickButton={AddToCartClick} 
-                buttonName='Ajouter au panier' 
-                link_ref={ref_bouton} 
-                link_name='Acheter' 
-                productId={props.id_produit}
-                setCartUser={props.setCartUser}
-                cartUser={props.cartUser}
-                />
-
         </div>
     );
 }
@@ -117,6 +125,17 @@ function ProductPreview(props) {
 /*
 <span>ref : </span><span id="ref">{props.id_produit}</span>
 {console.log("Référence ID: ",document.getElementById("ref"))}
+
+
+<CreateLink 
+    setCurrentPage={props.setCurrentPage} 
+    currentName='product-detail' 
+    link_ref={ref_lien} 
+    link_name='Album detail' 
+    productId={props.id_produit}
+    setCurrentProduct={props.setCurrentProduct}
+/>
+
 
 */
 
