@@ -37,12 +37,13 @@ app.use(
 )
 
 const checkSession = (request, response, next) => {
+    console.log('rq ss: ', request.session)
+    console.log('rq logged: ', request.session.isUserLogged)
+    console.log('rq userId: ', request.session.userId)
     if(request.session && request.session.isUserLogged == true){
-        response.send(request.session.userLogin)
-        next()
-    }else{
-        response.send('User not logged')
+        response.send(request.session.userLogin)  
     }
+    next()
 }
 
 
@@ -55,10 +56,10 @@ app.get("/", checkSession, (request, response, next) => {
 
     if(! request.session.userId){
         request.session.userId = uid(32)
-        request.session.panierUser = []
-        request.session.isUserLogged = false
-        request.session.userLogin = '' 
-        request.session.userRole = 'client'
+        //request.session.panierUser = []
+        //request.session.isUserLogged = false
+        //request.session.userLogin = '' 
+        //request.session.userRole = 'client'
     }
     /*
     let retourJson = {
@@ -186,6 +187,11 @@ app.post("/create-product", (request, response, next) => {
     }, 1000);
 })
 
+
+app.get("/logout", (request, response, next) => {
+    request.session.destroy()
+    response.send("You're now logout")
+})
 
 
 

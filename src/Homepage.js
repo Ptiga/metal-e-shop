@@ -57,6 +57,15 @@ function Homepage(props){
                 setCurrentProduct={props.setCurrentProduct}
                 user={props.user}
             />
+            <CreateLink 
+                setCurrentPage={props.setCurrentPage} 
+                currentName='user-deconnexion' 
+                link_ref='#logout' 
+                link_name='Déconnexion'
+                productId={props.id_produit} 
+                setCurrentProduct={props.setCurrentProduct}
+                user={props.user}
+            />
         </div>
     )
 
