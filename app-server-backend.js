@@ -18,13 +18,14 @@ app.use(cors({
 }))
 
 const cookieParser = require('cookie-parser');
+const { useEffect } = require("react");
 app.use(cookieParser());
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
 
-
+/*
 app.use(
     session(
         { 
@@ -35,6 +36,23 @@ app.use(
         }
     )
 )
+*/
+app.use(
+    session(
+        { 
+            secret: 'keyboard cat', 
+            resave: false,
+            saveUninitialized: true,
+            cookie: { 
+                maxAge: 600000,
+                //httpOnly: true,
+                sameSite: "lax"
+                //secure: true
+            }
+        }
+    )
+)
+
 
 const checkSession = (request, response, next) => {
     console.log('rq ss: ', request.session)
@@ -54,7 +72,12 @@ app.get("/", (request, response, next) => {
 */
 app.get("/", checkSession, (request, response, next) => {
 
-    if(! request.session.userId){
+    console.log('request session user Id :', request.session.userId)
+    console.log('true/false: ', !request.session.userId)
+    console.log('true/false 2 : ', request.session.userId === undefined)
+
+    //if(!request.session.userId){
+    if(request.session.userId ===undefined){
         console.log('je passe par là')
         request.session.userId = uid(32),
         request.session.panierUser = [],
@@ -100,6 +123,7 @@ app.post("/user-connexion", (request, response, next) => {
             request.session.userRole = results[0].user_role
             console.log("connected")
             console.log('cookie de session: ', request.session)
+            request.session.save()
             //response.send("connected")
             response.send('Connected as  ' + request.session.userLogin)
             //response.json(request.session)

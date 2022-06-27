@@ -36,7 +36,7 @@ function ConnectUser(event){
         alert(data))
     //.catch(e => alert('error: ' + e));   
 
-
+//event.PreventDefault()
 }
 
 
@@ -62,12 +62,12 @@ function UserConnexion(props){
                   <br />
                   <input type="submit" value="Connexion" />
               </form>
-              <CreateLink 
+            <CreateLink 
                 setCurrentPage={props.setCurrentPage} 
                 currentName='homepage' 
-                link_ref='#' 
+                link_ref='http://localhost:3000/#' 
                 link_name='Accueil' 
-              />
+             />
           </div>
       )
     }

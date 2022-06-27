@@ -42,7 +42,7 @@ function calculTotal(panier){
     for(let i = 0; i<panier.length; i++){
         total += panier[i].prix
     }
-    return total
+    return parseFloat(total).toFixed(2)
 }
 /*
 function SplitPanier(props){
@@ -108,6 +108,7 @@ function PanierDetail(props){
                     <span> || </span>
                     <span>{compiledPanier[0].prix}</span>
                     <span> €</span>
+                    <button>Supprimer</button>
                 </div>
             }
             {taillePanier > 1 &&
@@ -115,6 +116,7 @@ function PanierDetail(props){
                     {compoDuPanier = compiledPanier.map(elementDuPanier =>
                         <PanierSplit {...elementDuPanier} />)}
                 </div>
+                
             }
 
             <br />
