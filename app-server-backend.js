@@ -44,7 +44,7 @@ app.use(
             resave: false,
             saveUninitialized: true,
             cookie: { 
-                maxAge: 600000,
+                maxAge: 6000000,
                 //httpOnly: true,
                 sameSite: "lax"
                 //secure: true
@@ -53,7 +53,7 @@ app.use(
     )
 )
 
-
+/*
 const checkSession = (request, response, next) => {
     console.log('rq ss: ', request.session)
     console.log('rq logged: ', request.session.isUserLogged)
@@ -63,6 +63,7 @@ const checkSession = (request, response, next) => {
     }
     next()
 }
+*/
 
 
 /*
@@ -70,14 +71,14 @@ app.get("/", (request, response, next) => {
     response.redirect("/#")
 })
 */
-app.get("/", checkSession, (request, response, next) => {
+app.get("/", (request, response, next) => {
 
     console.log('request session user Id :', request.session.userId)
     console.log('true/false: ', !request.session.userId)
     console.log('true/false 2 : ', request.session.userId === undefined)
 
     //if(!request.session.userId){
-    if(request.session.userId ===undefined){
+    if(request.session.userId===undefined){
         console.log('je passe par là')
         request.session.userId = uid(32),
         request.session.panierUser = [],
@@ -118,16 +119,16 @@ app.post("/user-connexion", (request, response, next) => {
             console.log('cookie de session: ', request.session)
             response.send("not connected")
         }else{
-            request.session.isUserLogged = true
-            request.session.userLogin = results[0].user_login 
-            request.session.userRole = results[0].user_role
-            console.log("connected")
-            console.log('cookie de session: ', request.session)
-            request.session.save()
-            //response.send("connected")
-            response.send('Connected as  ' + request.session.userLogin)
-            //response.json(request.session)
-
+                request.session.isUserLogged = true
+                request.session.userLogin = results[0].user_login 
+                request.session.userRole = results[0].user_role
+                console.log("connected")
+                console.log('cookie de session: ', request.session)
+                request.session.save()
+                //response.send("connected")
+                response.send('Connected as  ' + request.session.userLogin)
+                //response.json(request.session)
+            
         }
         
         /*
@@ -184,11 +185,29 @@ app.get("/product-detail/:productId", (request, response, next) => {
 
 app.get("/add-product-to-cart/:productId", (request, response, next) => {
     let productId = request.params.productId
-    console.log(typeof(productId))
+    console.log('type de productId: ',typeof(productId))
     console.log('session user: ', request.session)
     request.session.panierUser.push(productId)
     console.log('cookie de session: ', request.session)
-   response.json(request.session.panierUser)
+    console.log('Panier User: ', request.session.panierUser)
+    response.json(request.session.panierUser)
+})
+
+
+app.get("/remove-from-cart/:productId", (request, response, next) => {
+    let productId = request.params.productId
+
+
+
+    console.log('panier avant suppression: ', request.session.panierUser)
+
+    let positionProduit = request.session.panierUser.indexOf(productId);
+    if (positionProduit !== -1) {
+        request.session.panierUser.splice(positionProduit, 1);
+    }
+
+    console.log('panier après suppression: ', request.session.panierUser)
+    response.send('Produit supprimé')
 })
 
 

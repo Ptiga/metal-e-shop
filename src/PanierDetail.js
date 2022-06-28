@@ -1,11 +1,19 @@
 import PanierSplit from "./PanierSplit"
+import CreateRemoveButton from "./CreateRemoveButton"
 
+function RetirerProduit(productId){
 
+    console.log('type envoyé: ', typeof(productId))
 
+    let url = `http://localhost:4000/remove-from-cart/${productId}`
 
+    fetch(url, {
+        method: 'GET',
+        credentials: 'include'
+        //credentials: "same-origin"
+    })
 
-
-
+}
 
 
 function CompileDetail(panier, produits){
@@ -99,27 +107,43 @@ function PanierDetail(props){
                 <h2>Votre panier est vide</h2>
             }
             {taillePanier == 1 &&
-                <div>
-                    <span>ref#{compiledPanier[0].idProduct}</span>
-                    <span> - </span>
-                    <span>{compiledPanier[0].artiste}</span>
-                    <span> - </span>
-                    <span>{compiledPanier[0].album}</span>
-                    <span> || </span>
-                    <span>{compiledPanier[0].prix}</span>
-                    <span> €</span>
-                    <button>Supprimer</button>
+                <div className="row">
+                    <div className="col-4">
+                        <span>{compiledPanier[0].artiste}</span>
+                    </div>
+                    <div className="col-4">
+                        <span>{compiledPanier[0].album}</span>
+                    </div>
+                    <div className="col-3">
+                        <span>{compiledPanier[0].prix}</span>
+                        <span> €</span>
+                    </div>
+                    <div className="col-1">
+
+                    <CreateRemoveButton 
+                        actionOnClickButton={RetirerProduit} 
+                        buttonName='Retirer' 
+                        link_ref='#detail-panier'
+                        link_name='Retirer' 
+                        productId={compiledPanier[0].idProduct}
+                        setCartUser={props.setCartUser}
+                        cartUser={props.cartUser}
+                    />
+
+
+                    </div>
                 </div>
             }
             {taillePanier > 1 &&
                 <div>
                     {compoDuPanier = compiledPanier.map(elementDuPanier =>
-                        <PanierSplit {...elementDuPanier} />)}
+                        <PanierSplit {...elementDuPanier} retraitProduit={RetirerProduit} />)
+                    }
                 </div>
                 
             }
 
-            <br />
+            <br />s
             {taillePanier > 0 &&
                 <div>
                     <span>Total du panier : </span>
@@ -133,3 +157,9 @@ function PanierDetail(props){
 }
 
 export default PanierDetail
+
+/*
+<button className="btn btn-outline-danger" onClick={RetirerProduit(compiledPanier[0].idProduct)}>
+    Retirer
+</button>
+*/
