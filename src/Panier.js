@@ -20,7 +20,6 @@ function Panier(props){
         fetch('http://localhost:4000/get-products', {
             method: 'GET',
             credentials: 'include'
-            //credentials: "same-origin"
         })
             .then(response => response.json())
             .then(productListRetrieved => {

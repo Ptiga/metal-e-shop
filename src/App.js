@@ -35,24 +35,10 @@ function App(props) {
       fetch('http://localhost:4000/', {
           method: 'GET',
           credentials: 'include'
-          //credentials: "same-origin"
       })
-            //.then(response => response.json())
             .then(response => response.text())
             .then(userIdRetrieved => {
               console.log('u retr ', userIdRetrieved)
-              /*setuserId({
-                login: userIdRetrieved.userLogin, 
-                isLogged: userIdRetrieved.isUserLogged, 
-                role: userIdRetrieved.userRole
-              })*/
-              /*
-              setuserId([
-                userIdRetrieved.userLogin,
-                userIdRetrieved.isUserLogged,
-                userIdRetrieved.userRole
-              ])
-              */
               setuserId(userIdRetrieved)
               console.log('user id: ', userId)
             })
@@ -116,7 +102,3 @@ function App(props) {
 }
 
 export default App;
-
-
-/*
-*/

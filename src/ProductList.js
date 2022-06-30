@@ -8,14 +8,12 @@ import Panier from "./Panier";
 function ProductList(props){
 
     let[listeProduits, setListeProduits] = useState([])
-    //let [productToAdd, setProductToAdd] = useState('')
     let[cartUser, setCartUser] = useState([])
 
     useEffect(() => {
         fetch('http://localhost:4000/get-products', {
             method: 'GET',
             credentials: 'include'
-            //credentials: "same-origin"
         })
             .then(response => response.json())
             .then(productListRetrieved => {
@@ -35,7 +33,7 @@ function ProductList(props){
             setCartUser={setCartUser} 
             cartUser={cartUser} 
             productId={props.id_produit} 
-        />) //Permet de copier l'objet
+        />) 
 
 
 
@@ -90,18 +88,3 @@ function ProductList(props){
 }
 
 export default ProductList
-
-/*
-<CreateLink 
-    setCurrentPage={props.setCurrentPage} 
-    currentName='homepage' 
-    link_ref='#' 
-    link_name='Accueil' 
-    productId={props.id_produit}
-    setCurrentProduct={props.setCurrentProduct}
-    setCurrentArtist={props.setCurrentArtist}
-    setCurrentAlbum={props.setCurrentAlbum}
-    setCurrentGenre={props.setCurrentGenre}
-    setCurrentPrix={props.setCurrentPrix}
-/>
-*/

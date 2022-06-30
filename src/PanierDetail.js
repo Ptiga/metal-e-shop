@@ -10,7 +10,6 @@ function RetirerProduit(productId){
     fetch(url, {
         method: 'GET',
         credentials: 'include'
-        //credentials: "same-origin"
     })
 
 }
@@ -27,8 +26,6 @@ function CompileDetail(panier, produits){
     if(panier.length>0){
         for(let i = 0; i<panier.length; i++){
             for(let x = 0; x<produits.length; x++){
-                //console.log(panier[i], ' <--> ', produits[x].id_produit)
-                //console.log(panier[i] == produits[x].id_produit)
                 if(panier[i] == produits[x].id_produit){
                     detailCompiled.push({
                         idProduct: panier[i],
@@ -52,23 +49,7 @@ function calculTotal(panier){
     }
     return parseFloat(total).toFixed(2)
 }
-/*
-function SplitPanier(props){
-    console.log('props du split: ', props)
-    return (
-        <div>
-            <span>{props.idProduct}</span>
-            <span> - </span>
-            <span>{props.artiste}</span>
-            <span> - </span>
-            <span>{props.album}</span>
-            <span> || </span>
-            <span>{props.prix}</span>
-            <span> €</span>
-        </div>
-    )
-}
-*/
+
 
 function PanierDetail(props){
 
@@ -78,11 +59,6 @@ function PanierDetail(props){
     console.log("Elements panier: ", ElementsPanier)
     let ElementsProduits = props.allProducts
     console.log("Elements produits: ", ElementsProduits)
-/*
-    let CompoDuPanier = panier.map(elementDuPanier =>
-        <SplitPanier {...elementDuPanier}  />) //Permet de copier l'objet
-*/
-    //let x
     let compiledPanier = CompileDetail(props.panierUser, props.allProducts)
     let taillePanier = compiledPanier.length
     let totalPanier 
@@ -90,12 +66,6 @@ function PanierDetail(props){
     console.log('Penier compilé: ',compiledPanier)
     console.log('taille panier C: ',taillePanier)
     console.log('total: ',totalPanier)
-/*
-    if(taillePanier>1){
-        compoDuPanier = compiledPanier.map(elementDuPanier =>
-            <SplitPanier {...elementDuPanier} />) //Permet de copier l'objet
-    }
-*/    
     if(taillePanier>0){
         totalPanier = calculTotal(compiledPanier)
     }
@@ -103,10 +73,10 @@ function PanierDetail(props){
 
     return(
         <div>
-            {taillePanier == 0 &&
+            {taillePanier === 0 &&
                 <h2>Votre panier est vide</h2>
             }
-            {taillePanier == 1 &&
+            {taillePanier === 1 &&
                 <div className="row">
                     <div className="col-4">
                         <span>{compiledPanier[0].artiste}</span>
@@ -143,7 +113,7 @@ function PanierDetail(props){
                 
             }
 
-            <br />s
+            <br />
             {taillePanier > 0 &&
                 <div>
                     <span>Total du panier : </span>
@@ -157,9 +127,3 @@ function PanierDetail(props){
 }
 
 export default PanierDetail
-
-/*
-<button className="btn btn-outline-danger" onClick={RetirerProduit(compiledPanier[0].idProduct)}>
-    Retirer
-</button>
-*/

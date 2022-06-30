@@ -3,23 +3,17 @@ import CreateLink from "./CreateLink";
 
 function ConnectUser(event){
     console.log('fonction à créer pour connecter user')
-    //event.preventDefault()
-
     let createJson = { 
         login: document.getElementById("user-login").value,
         password: document.getElementById("user-password").value,
   }
 
-
-
-
     console.log('Json: ', createJson)
-    //alert()
+
     const url = "http://localhost:4000/user-connexion"
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
-        //body: JSON.stringify({ title: 'React POST Request Example' }),
         body: JSON.stringify(createJson)
     }
     console.log('req opt: ', requestOptions)
@@ -27,16 +21,9 @@ function ConnectUser(event){
 
     fetch(url, requestOptions)
     .then(response => response.text())
-        //response.json())
-        //console.log('réponse log: ', response.json()))
-        //console.log('réponse log: ', response.text()))
-    //.then(data => this.setState({ postId: data.id }));
     .then(data => 
-        //console.log('data: ',data))
         alert(data))
-    //.catch(e => alert('error: ' + e));   
 
-//event.PreventDefault()
 }
 
 
@@ -44,11 +31,7 @@ function ConnectUser(event){
 
 
 function UserConnexion(props){
-    //<form id="create-product" method="post" enctype="application/x-www-form-urlencoded" onSubmit={ActionSurSubmit}>
-    //Pourquoi est-ce que la fonction 'ActionSurSubmit' ne fonctionne pas sans les '()' ????
-
     console.log('pros  connexion: ', props)
-
       return(
           <div>
               <h1>
@@ -71,12 +54,5 @@ function UserConnexion(props){
           </div>
       )
     }
-    
-/*    
-    <label htmlFor="album-type">Genre : </label>
-    <input className="form-control" name="genre" id="album-type" />
-    <label htmlFor="product-price">Prix : </label>
-    <input className="form-control" type="number" step="0.01" name="prix" id="product-price" />
-*/  
-  
+
   export default UserConnexion;

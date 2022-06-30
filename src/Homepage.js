@@ -2,7 +2,6 @@ import CreateLink from "./CreateLink"
 import './App.css';
 import RandomTrack from "./RandomTrack";
 import UserConnexion from "./UserConnexion";
-//import { useState, useEffect } from 'react';
 
 function Homepage(props){
 
@@ -92,22 +91,5 @@ function Homepage(props){
     )
 
 }
-
-/*
-            import soundfile from "../neure-resources/test.mp
-            <div className="count-number-equivelance-audioPlayer">
-                <button id="equivalence-audio-button" onClick={() => audio.play()}>Soundclip!</button>
-            </div>
-
-
-                        <CreateLink 
-                setCurrentPage={props.setCurrentPage} 
-                currentName='user-connexion' 
-                link_ref='#login' 
-                link_name='Connexion'
-                productId={props.id_produit} 
-                setCurrentProduct={props.setCurrentProduct}
-            />
-*/
 
 export default Homepage

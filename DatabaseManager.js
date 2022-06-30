@@ -30,37 +30,9 @@ function getProduct(fonctionDeTraitementResultatBDD, updateType, productId) {
   let connexionBdd = connexionToMysql()
   let requete = requestToApply(updateType)
   console.log('Requete : ', requete)
-  //connexionBdd.query(requete, fonctionDeTraitementResultatBDD)
-  //connexionBdd.end();
   connexionBdd.query(requete, productId, fonctionDeTraitementResultatBDD)
   connexionBdd.end();;
 }
-
-/*  
-//Fonction pour obtenir des éléments (OLD FONCTION)
-function getProduct(fonctionDeTraitementResultatBDD, updateType, productId, panierUser) {
-  let connexionBdd = connexionToMysql()
-  let requete = requestToApply(updateType)
-  console.log('Requete : ', requete)
-  //connexionBdd.query(requete, fonctionDeTraitementResultatBDD)
-  //connexionBdd.end();
-  connexionBdd.query(requete, productId, function (error, results, fields) {
-    if (error) {
-      console.log(error)
-    }// throw error;
-    else {
-      // console.log("step 2 - query application")
-      console.log("Données insérées");
-    }
-    //connexionBdd.commit() // Permet d'enregistrer les modifications sur la BDD
-    console.log('result rq: ', results)
-    panierUser.push(results)
-    console.log('insert: ', panierUser)
-    connexionBdd.end();
-    console.log("step 3 - close query mode")
-  });
-}
-*/
 
 
 //Fonction pour mettre à jour des éléments
@@ -68,7 +40,6 @@ function updateDataBase(requeteBody, updateType) {
   console.log('rqt bd: ', requeteBody)
 
     let connexionBdd = connexionToMysql()
-    //updateType  = adjustUpdateType(requeteBody, updateType)
     let requete = requestToApply(updateType)
     let dataToInsert = dataToApplyForRequest(requeteBody, updateType)
     console.log('rqt to apply: ', requete)
@@ -95,24 +66,7 @@ function updateDataBase(requeteBody, updateType) {
     let requete = requestToApply(updateType)
     let dataToInsert = dataToApplyForRequest(requestBody, updateType)
     console.log('Requete : ', requete)
-    //connexionBdd.query(requete, fonctionDeTraitementResultatBDD)
-    //connexionBdd.end();
     connexionBdd.query(requete, dataToInsert, fonctionDeTraitementResultatBDD)
-    /* 
-    {
-      if (error) {
-        console.log(error)
-      }// throw error;
-      else {
-        // console.log("step 2 - query application")
-        console.log("Données insérées");
-      }
-      //connexionBdd.commit() // Permet d'enregistrer les modifications sur la BDD
-      console.log('result rq: ', results)
-      connexionBdd.end();
-      console.log("step 3 - close query mode")
-    });
-    */
   }
 
 
